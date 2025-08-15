@@ -63,7 +63,6 @@ resource fortios_systemdhcp_server dhcp {
 
 resource fortios_systemdhcp6_server dhcp {
   for_each              = { for server in local.dhcp6 : server.interface => server}
-  depends_on            = [ module.interfaces ]
 
   fosid                 = index(local.dhcp6, each.value) + 1
   interface             = each.value.interface
