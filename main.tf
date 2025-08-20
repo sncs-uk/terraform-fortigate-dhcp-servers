@@ -12,7 +12,7 @@ terraform {
 }
 
 locals {
-  dhcp_yaml       = yamldecode(file("${var.config_path}/config/dhcp-servers.yaml"))
+  dhcp_yaml       = yamldecode(file("${var.config_path}/dhcp-servers.yaml"))
   dhcp            = try(local.dhcp_yaml.dhcp, [])
   dhcp6           = try(local.dhcp_yaml.dhcp6, [])
 }
