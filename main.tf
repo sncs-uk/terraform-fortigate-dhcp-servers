@@ -20,23 +20,24 @@ locals {
 }
 
 resource fortios_systemdhcp_server dhcp {
-  for_each        = { for server in local.dhcp : server.interface => server}
+  for_each                = { for server in local.dhcp : server.interface => server}
 
-  interface       = each.value.interface
-  netmask         = each.value.netmask
-  default_gateway = each.value.gateway
-  lease_time      = each.value.lease_time
+  interface               = each.value.interface
+  netmask                 = each.value.netmask
+  default_gateway         = each.value.gateway
+  lease_time              = each.value.lease_time
+  mac_acl_default_action  = try(each.value.mac_acl_default_action, null)
 
-  vdomparam       = each.value.vdom
+  vdomparam               = each.value.vdom
 
-  dns_server1     = try(each.value.dns[0], null)
-  dns_server2     = try(each.value.dns[1], null)
-  dns_server3     = try(each.value.dns[2], null)
-  dns_server4     = try(each.value.dns[3], null)
+  dns_server1             = try(each.value.dns[0], null)
+  dns_server2             = try(each.value.dns[1], null)
+  dns_server3             = try(each.value.dns[2], null)
+  dns_server4             = try(each.value.dns[3], null)
 
-  ntp_server1     = try(each.value.ntp[0], null)
-  ntp_server2     = try(each.value.ntp[1], null)
-  ntp_server3     = try(each.value.ntp[2], null)
+  ntp_server1             = try(each.value.ntp[0], null)
+  ntp_server2             = try(each.value.ntp[1], null)
+  ntp_server3             = try(each.value.ntp[2], null)
 
   dynamic ip_range {
     for_each    = { for range in each.value.ranges : range.start => range }
