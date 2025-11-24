@@ -5,13 +5,16 @@ This terraform module configures DHCP servers on a firewall
 
 ## Requirements
 
-No requirements.
+| Name | Version |
+|------|---------|
+| <a name="requirement_terraform"></a> [terraform](#requirement\_terraform) | >= 1.13.0 |
+| <a name="requirement_fortios"></a> [fortios](#requirement\_fortios) | >= 1.22.0 |
 
 ## Providers
 
 | Name | Version |
 |------|---------|
-| <a name="provider_fortios"></a> [fortios](#provider\_fortios) | n/a |
+| <a name="provider_fortios"></a> [fortios](#provider\_fortios) | >= 1.22.0 |
 
 ## Modules
 
@@ -29,7 +32,6 @@ No modules.
 | Name | Description | Type | Default | Required |
 |------|-------------|------|---------|:--------:|
 | <a name="input_config_path"></a> [config\_path](#input\_config\_path) | Path to base configuration directory | `string` | n/a | yes |
-| <a name="input_vdoms"></a> [vdoms](#input\_vdoms) | List of VDOMs from which to pull in configuration | `list(string)` | `[]` | no |
 
 ## Outputs
 
