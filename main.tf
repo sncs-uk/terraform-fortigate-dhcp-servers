@@ -51,9 +51,8 @@ resource "fortios_systemdhcp_server" "dhcp" {
   }
 
   dynamic "reserved_address" {
-    for_each = { for reservation in try(each.value.reservations, []) : reservation.mac => reservation }
+    for_each = { for reservation in try(each.value.reservations, []) : index(try(each.value.reservations, []), reservation) => reservation }
     content {
-      id          = index(each.value.reservations, reserved_address.value) + 1
       type        = "mac"
       mac         = reserved_address.value.mac
       ip          = reserved_address.value.ip
