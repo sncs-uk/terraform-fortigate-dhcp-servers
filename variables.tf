@@ -100,8 +100,10 @@ variable "dhcp4" {
       remote_id       = optional(string)
       description     = optional(string)
     })), [])
-    vdomparam        = optional(string)
-    update_if_exists = optional(bool)
+    dynamic_sort_subtable = optional(string, "natural")
+    get_all_tables        = optional(bool, false)
+    vdomparam             = optional(string)
+    update_if_exists      = optional(bool)
   }))
   description = "DHCPv4 servers to create"
   default     = []
@@ -151,8 +153,10 @@ variable "dhcp6" {
       vci_match  = optional(string)
       vci_string = optional(list(string), [])
     })), [])
-    vdomparam        = optional(string)
-    update_if_exists = optional(bool)
+    dynamic_sort_subtable = optional(string, "natural")
+    get_all_tables        = optional(bool, false)
+    vdomparam             = optional(string)
+    update_if_exists      = optional(bool)
   }))
   description = "DHCPv6 servers to create"
   default     = []

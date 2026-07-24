@@ -64,6 +64,8 @@ resource "fortios_systemdhcp_server" "dhcp" {
   vci_match                      = each.value.vci_match
   shared_subnet                  = each.value.shared_subnet
   relay_agent                    = each.value.relay_agent
+  dynamic_sort_subtable          = each.value.dynamic_sort_subtable
+  get_all_tables                 = each.value.get_all_tables
   vdomparam                      = each.value.vdomparam
 
   dynamic "ip_range" {
@@ -212,6 +214,8 @@ resource "fortios_systemdhcp6_server" "dhcp" {
   delegated_prefix_iaid  = each.value.delegated_prefix_iaid
   ip_mode                = each.value.ip_mode
   prefix_mode            = each.value.prefix_mode
+  dynamic_sort_subtable  = each.value.dynamic_sort_subtable
+  get_all_tables         = each.value.get_all_tables
   vdomparam              = each.value.vdomparam
   update_if_exist        = each.value.update_if_exist
 
