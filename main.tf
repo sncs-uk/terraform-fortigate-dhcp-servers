@@ -67,7 +67,7 @@ resource "fortios_systemdhcp_server" "dhcp" {
   vdomparam                      = each.value.vdomparam
 
   dynamic "ip_range" {
-    for_each = { for range in each.value.ranges : range.start => range }
+    for_each = { for range in each.value.ip_range : range.start => range }
     content {
       id         = index(each.value.ranges, ip_range.value) + 1
       start_ip   = ip_range.value.start_ip
@@ -100,7 +100,7 @@ resource "fortios_systemdhcp_server" "dhcp" {
   }
 
   dynamic "tftp_server" {
-    for_each = { for server in each.value.tftp_servers : server => server }
+    for_each = { for server in each.value.tftp_server : server => server }
     content {
       tftp_server = tftp_server.value
     }
@@ -230,7 +230,7 @@ resource "fortios_systemdhcp6_server" "dhcp" {
   }
 
   dynamic "ip_range" {
-    for_each = { for range in each.value.ranges : range.start => range }
+    for_each = { for range in each.value.ip_range : range.start => range }
     content {
       id        = index(each.value.ranges, ip_range.value) + 1
       start_ip  = ip_range.value.start_ip
