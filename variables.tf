@@ -1,5 +1,159 @@
-variable "config_path" {
-  description = "Path to base configuration directory"
-  type        = string
+variable "dhcp4" {
+  type = list(object({
+    fosid                     = optional(number)
+    status                    = optional(string)
+    lease_time                = optional(number)
+    mac_acl_default_action    = optional(string)
+    forticlient_on_net_status = optional(string)
+    dns_service               = optional(string)
+    dns_server1               = optional(string)
+    dns_server2               = optional(string)
+    dns_server3               = optional(string)
+    dns_server4               = optional(string)
+    wifi_ac_service           = optional(string)
+    wifi_ac1                  = optional(string)
+    wifi_ac2                  = optional(string)
+    wifi_ac3                  = optional(string)
+    ntp_service               = optional(string)
+    ntp_server1               = optional(string)
+    ntp_server2               = optional(string)
+    ntp_server3               = optional(string)
+    domain                    = optional(string)
+    wins_server1              = optional(string)
+    wins_server2              = optional(string)
+    default_gateway           = optional(string)
+    next_server               = optional(string)
+    netmask                   = string
+    interface                 = string
+    ip_range = optional(list(object({
+      id         = optional(number)
+      start_ip   = string
+      end_ip     = string
+      vci_match  = optional(string)
+      vci_string = optional(list(string), [])
+      uci_match  = optional(string)
+      uci_string = optional(list(string), [])
+      oui_match  = optional(string)
+      oui_string = optional(list(string), [])
+      lease_time = optional(number)
+      vendor     = optional(string)
+    })), [])
+    timezone_option                = optional(string)
+    timezone                       = optional(string)
+    tftp_server                    = optional(list(string), [])
+    filename                       = optional(string)
+    template                       = optional(string)
+    template_subnet                = optional(string)
+    template_subnet_from_interface = optional(string)
+    options = optional(list(object({
+      id         = optional(number)
+      code       = number
+      type       = optional(string)
+      value      = optional(string)
+      ip         = optional(string)
+      vci_match  = optional(string)
+      vci_string = optional(list(string), [])
+      uci_match  = optional(string)
+      uci_string = optional(list(string), [])
+    })), [])
+    server_type                  = optional(string)
+    ip_mode                      = optional(string)
+    conflicted_ip_timeout        = optional(number)
+    ipsec_lease_hold             = optional(number)
+    auto_configuration           = optional(string)
+    dhcp_settings_from_fortiipam = optional(string)
+    auto_managed_status          = optional(string)
+    ddns_update                  = optional(string)
+    ddns_update_override         = optional(string)
+    ddns_server_ip               = optional(string)
+    ddns_zone                    = optional(string)
+    ddns_auth                    = optional(string)
+    ddns_keyname                 = optional(string)
+    ddns_key                     = optional(string)
+    ddns_ttl                     = optional(string)
+    vci_match                    = optional(string)
+    vci_string                   = optional(list(string), [])
+    exclude_range = optional(list(object({
+      id         = optional(number)
+      start_ip   = string
+      end_ip     = string
+      vci_match  = optional(string)
+      vci_string = optional(list(string), [])
+      uci_match  = optional(string)
+      uci_string = optional(list(string), [])
+      oui_match  = optional(string)
+      oui_string = optional(list(string), [])
+      lease_time = optional(number)
+      vendor     = optional(string)
+    })), [])
+    shared_subnet = optional(string)
+    relay_agent   = optional(string)
+    reserved_address = optional(list(object({
+      id              = optional(number)
+      type            = optional(string)
+      ip              = string
+      mac             = string
+      action          = optional(string)
+      circuit_id_type = optional(string)
+      circuit_id      = optional(string)
+      remote_id_type  = optional(string)
+      remote_id       = optional(string)
+      description     = optional(string)
+    })), [])
+    vdomparam        = optional(string)
+    update_if_exists = optional(bool)
+  }))
+  description = "DHCPv4 servers to create"
+  default     = []
 }
-
+variable "dhcp6" {
+  type = list(object({
+    fosid                 = optional(number)
+    status                = optional(string)
+    rapid_commit          = optional(string)
+    lease_time            = optional(number)
+    dns_service           = optional(string)
+    dns_search_list       = optional(string)
+    dns_server1           = optional(string)
+    dns_server2           = optional(string)
+    dns_server3           = optional(string)
+    dns_server4           = optional(string)
+    domain                = optional(string)
+    subnet                = string
+    interface             = string
+    delegaed_prefix_route = optional(string)
+    options = optional(list(object({
+      id         = optional(number)
+      code       = number
+      type       = optional(string)
+      value      = optional(string)
+      ip6        = optional(string)
+      vci_match  = optional(string)
+      vci_string = optional(list(string), [])
+    })), [])
+    option1               = optional(string)
+    option2               = optional(string)
+    option3               = optional(string)
+    upstream_interface    = optional(string)
+    delegated_prefix_iaid = optional(string)
+    ip_mode               = optional(string)
+    prefix_mode           = optional(string)
+    prefix_range = optional(list(object({
+      id            = optional(number)
+      start_prefix  = string
+      end_prefix    = string
+      prefix_length = number
+    })), [])
+    ip_range = optional(list(object({
+      id         = optional(number)
+      start_ip   = string
+      end_ip     = string
+      vci_match  = optional(string)
+      vci_string = optional(list(string), [])
+    })), [])
+    vdomparam        = optional(string)
+    update_if_exists = optional(bool)
+  }))
+  description = "DHCPv6 servers to create"
+  default     = []
+}
