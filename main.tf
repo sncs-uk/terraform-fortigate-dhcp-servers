@@ -171,6 +171,22 @@ resource "fortios_systemdhcp_server" "dhcp" {
       }
     }
   }
+
+  dynamic "reserved_address" {
+    for_each = { for reserved_address in each.value.reserved_address : reserved_address.mac => reserved_address }
+    content {
+      id              = reserved_address.value.id
+      type            = reserved_address.value.type
+      ip              = reserved_address.value.ip
+      mac             = reserved_address.value.mac
+      action          = reserved_address.value.action
+      circuit_id_type = reserved_address.value.circuit_id_type
+      circuit_id      = reserved_address.value.circuit_id
+      remote_id_type  = reserved_address.value.remote_id_type
+      remote_id       = reserved_address.value.remote_id
+      description     = reserved_address.value.description
+    }
+  }
 }
 
 resource "fortios_systemdhcp6_server" "dhcp" {
