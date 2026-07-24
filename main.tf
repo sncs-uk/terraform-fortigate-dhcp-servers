@@ -141,31 +141,31 @@ resource "fortios_systemdhcp_server" "dhcp" {
   }
 
   dynamic "exclude_range" {
-    for_each = { for ip_range in each.value.exclude_range : index(each.value.exclude_range, ip_range) => ip_range }
+    for_each = { for exclude_range in each.value.exclude_range : index(each.value.exclude_range, exclude_range) => exclude_range }
     content {
-      id         = index(each.value.ranges, ip_range.value) + 1
-      start_ip   = ip_range.value.start
-      end_ip     = ip_range.value.end
-      vci_match  = ip_range.value.vci_match
-      uci_match  = ip_range.value.uci_match
-      oui_match  = ip_range.value.oui_match
-      lease_time = ip_range.value.lease_time
-      vendor     = ip_range.value.vendor
+      id         = index(each.value.ranges, exclude_range.value) + 1
+      start_ip   = exclude_range.value.start
+      end_ip     = exclude_range.value.end
+      vci_match  = exclude_range.value.vci_match
+      uci_match  = exclude_range.value.uci_match
+      oui_match  = exclude_range.value.oui_match
+      lease_time = exclude_range.value.lease_time
+      vendor     = exclude_range.value.vendor
 
       dynamic "vci_string" {
-        for_each = { for str in ip_range.value.vci_string : str => str }
+        for_each = { for str in exclude_range.value.vci_string : str => str }
         content {
           vci_string = vci_string.value
         }
       }
       dynamic "uci_string" {
-        for_each = { for str in ip_range.value.uci_string : str => str }
+        for_each = { for str in exclude_range.value.uci_string : str => str }
         content {
           uci_string = uci_string.value
         }
       }
       dynamic "oui_string" {
-        for_each = { for str in ip_range.value.oui_string : str => str }
+        for_each = { for str in exclude_range.value.oui_string : str => str }
         content {
           oui_string = oui_string.value
         }
