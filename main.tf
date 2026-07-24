@@ -62,7 +62,6 @@ resource "fortios_systemdhcp_server" "dhcp" {
   ddns_key                       = each.value.ddns_key
   ddns_ttl                       = each.value.ddns_ttl
   vci_match                      = each.value.vci_match
-  vci_string                     = each.value.vci_string
   shared_subnet                  = each.value.shared_subnet
   relay_agent                    = each.value.relay_agent
   vdomparam                      = each.value.vdomparam
