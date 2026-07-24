@@ -67,7 +67,7 @@ resource "fortios_systemdhcp_server" "dhcp" {
   vdomparam                      = each.value.vdomparam
 
   dynamic "ip_range" {
-    for_each = { for range in each.value.ip_range : range.start => range }
+    for_each = { for range in each.value.ip_range : range.start_ip => range }
     content {
       id         = index(each.value.ranges, ip_range.value) + 1
       start_ip   = ip_range.value.start_ip
